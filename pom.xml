@@ -24,6 +24,36 @@
 		<module>service</module>
 	</modules>
 
+	<!--<distributionManagement>-->
+		<!--<repository>&lt;!&ndash; 私仓上传公司共用jar包 &ndash;&gt;-->
+			<!--<id>releases</id>-->
+			<!--<url>http://maven.pujitech.com:8081/nexus/content/repositories/releases/</url>-->
+		<!--</repository>-->
+		<!--<snapshotRepository>&lt;!&ndash; 如果没有快照版本，可以不添加这段 &ndash;&gt;-->
+			<!--<id>snapshots</id>-->
+			<!--<url>http://maven.pujitech.com:8081/nexus/content/repositories/snapshots/</url>-->
+		<!--</snapshotRepository>-->
+	<!--</distributionManagement>-->
+
+	<repositories>
+		<repository>
+			<id>pujitech-nexus</id>
+			<url>http://maven.pujitech.com:8081/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>pujitech-nexus</id>
+			<url>http://maven.pujitech.com:8081/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencies>
 
 		<dependency>
@@ -349,6 +379,11 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 
+		<dependency>
+			<groupId>com.hachismart.common</groupId>
+			<artifactId>common-utils</artifactId>
+			<version>1.12.0</version>
+		</dependency>
 
 		<!--   <dependency>
                <groupId>com.fasterxml.jackson.core</groupId>

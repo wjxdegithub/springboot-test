@@ -1,6 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.mybatis.bean.Users;
+import com.example.demo.mybatis.dao.UsersDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author wjx
@@ -8,8 +13,11 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class HelloService {
+    @Autowired(required = true)
+    private UsersDao usersMapper;
 
-    public String queryAll(){
-        return "333";
+    public List<Users> queryAll(){
+        List<Users> usersList = usersMapper.query();
+        return usersList;
     }
 }

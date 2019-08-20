@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="MysqlTables"    targetRuntime="MyBatis3">
+        <commentGenerator type="com.example.demo.generator.MyCommentGenerator">
+            <!--<property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>-->
+            <property name="javaFileEncoding" value="UTF-8"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false" />
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/anshuspace?useUnicode=true&amp;characterEncoding=UTF8"
+                        userId="root" password="root" >
+
+            <!-- 针对oracle数据库 -->
+            <property name="remarksReporting" value="true"></property>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.example.demo.mybatis.bean" targetProject="E:\work\JAVA\workspace\springboot-test\service\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="com.example.demo.mybatis.mapper" targetProject="E:\work\JAVA\workspace\springboot-test\service\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.demo.mybatis.dao" targetProject="E:\work\JAVA\workspace\springboot-test\service\src\main\java">
+        <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="euc_users" domainObjectName="Users" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="ignoreQualifiersAtRuntime" value="false"/>
+          </table>
+
+    </context>
+</generatorConfiguration>

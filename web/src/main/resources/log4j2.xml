@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+    <properties>
+        <property name="LOG_HOME">${sys:catalina.home}/logs/springboot-test</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %C %logger{36} - %msg%n"/>
+        </Console>
+
+
+        <!-- SQL输出日志 -->
+        <RollingFile name="sqlLog" fileName="${LOG_HOME}/sqlLog/sqlLog.log"
+                     filePattern="${LOG_HOME}/sqlLog/sqlLog-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-hh HH:mm:ss.SSS} [%t] %-5level %C %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+
+        <RollingFile name="MyFile" fileName="${LOG_HOME}/admin.log" filePattern="${LOG_HOME}/admin-%d{yyyy-MM-dd}.log">
+            <PatternLayout charset="UTF-8" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %C %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+
+        <!--只输出error级别的日志 看需要是否加上-->
+        <RollingFile name="errorLog" fileName="${LOG_HOME}/errorLog/errorLog.log"
+                     filePattern="${LOG_HOME}/errorLog/errorLog-%d{yyyy-MM-dd}.log">
+            <PatternLayout charset="UTF-8" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %C %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+
+
+        <logger name="com.example.demo.config.P6SpyLogger" level="INFO" additivity="false">
+            <AppenderRef ref="sqlLog"/>
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="MyFile"/>
+            <AppenderRef ref="errorLog"/>
+        </logger>
+
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="MyFile"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
