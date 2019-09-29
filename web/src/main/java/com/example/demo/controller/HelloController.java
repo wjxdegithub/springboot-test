@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.mybatis.bean.Users;
-import com.example.demo.service.HelloService;
+import com.example.demo.service.UserService;
 import com.pujitech.common.utils.JsonUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -16,17 +18,27 @@ import java.util.List;
  * @create 2019-08-16 16:24
  **/
 @Controller
-@RequestMapping("/hello/")
+@RequestMapping("/")
 public class HelloController {
     @Autowired
-    private HelloService helloService;
+    private UserService userService;
 
     private Log log = LogFactory.getLog(this.getClass());
 
-    @RequestMapping("1")
-    public String hello(){
-        List<Users> usersList =helloService.queryAll();
+    @RequestMapping("index")
+    public String hello(Model model){
+        List<Users> usersList =userService.queryAll();
         log.info("------" + JsonUtils.objs2Json(usersList));
-        return "hello";
+        model.addAttribute("data", usersList);
+        return "index";
+    }
+    @RequestMapping("del")
+    public String del(String id){
+        Users users = new Users();
+        users.setUserId(NumberUtils.toLong(id));
+        users.setEnable((byte)0);
+        int res = userService.update(users);
+        log.info("------" + res);
+        return "redirect:index";
     }
 }

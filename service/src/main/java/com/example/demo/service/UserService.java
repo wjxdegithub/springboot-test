@@ -12,12 +12,16 @@ import java.util.List;
  * @create 2019-08-16 17:31
  **/
 @Service
-public class HelloService {
+public class UserService {
     @Autowired(required = true)
-    private UsersDao usersMapper;
+    private UsersDao usersDao;
 
     public List<Users> queryAll(){
-        List<Users> usersList = usersMapper.query();
+        List<Users> usersList = usersDao.query();
         return usersList;
+    }
+
+    public int update(Users users){
+        return usersDao.updateByPrimaryKeySelective(users);
     }
 }

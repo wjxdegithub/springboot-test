@@ -249,5 +249,7 @@
     select
     <include refid="Base_Column_List" />
     from euc_users
+    WHERE enable = 1
+    ORDER BY create_time DESC
   </select>
 </mapper>

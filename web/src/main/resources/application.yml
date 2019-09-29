@@ -1,8 +1,8 @@
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
 
   application:
     name: web
@@ -25,5 +25,13 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+
+  thymeleaf:
+    prefix: classpath:/templates/
+#    prefix: classpath:/WEB-INF/html/
+    suffix: .html
+    mode: HTML5
+    encoding: utf-8
+    cache: false
 logging:
   config: classpath:log4j2.xml
